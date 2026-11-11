@@ -34,6 +34,31 @@ class InicioFragment : Fragment() {
         // - requireContext(): Proporciona el Contexto necesario para inflar layouts y acceder a recursos.
         // - R.array.provincias: Fuente de datos (string-array en res/values/arrays.xml).
         // - android.R.layout.simple_spinner_item: Diseño (layout) estándar para mostrar el elemento seleccionado dentro del Spinner.
+
+        //ALTERNATIVA SIN KOTLIN: android:entries
+        // Este Spinner se podría rellenar solo desde el XML, en fragment_inicio.xml:
+        //
+        //     <Spinner
+        //         android:id="@+id/spProvincia"
+        //         android:entries="@array/provincias"
+        //         ... />
+        //
+        // y sobrarían las cinco líneas de abajo. Por dentro, el Spinner hace lo mismo que
+        // ellas: crea un ArrayAdapter<CharSequence> con simple_spinner_item, le pone
+        // simple_spinner_dropdown_item para la lista desplegada y se lo asigna a sí mismo.
+        // Lo único que cambiaría en el listener: no habría variable "adaptador", así que
+        // adaptador.getItem(position) pasaría a ser parent?.getItemAtPosition(position).
+        //
+        // Aquí vale porque la lista es FIJA (cuatro provincias en un recurso), es SOLO
+        // TEXTO y se ve con los layouts que trae Android.
+        //
+        // NO valdría para el ListView de ListaFragment: sus datos dependen de la provincia
+        // que llega por Safe Args, salen de Roteiro.kt (no de un recurso), son objetos
+        // Lugar que hay que pasar a texto con map, y cada fila usa un layout propio
+        // (fila_lugar.xml). Nada de eso se puede escribir en un XML.
+        //
+        // Lo hacemos en Kotlin porque es el caso más sencillo para aprender el patrón que
+        // luego hace falta en la lista: contexto, datos, layout de fila y asignar.
         val adaptador = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.provincias,
