@@ -4,7 +4,7 @@
 
 ---
 
-## 📱 Descripción de la Aplicación
+## Descripción de la Aplicación
 
 **Roteiro** es una aplicación nativa para Android desarrollada en Kotlin que sirve como guía turística interactiva por las cuatro provincias de Galicia (A Coruña, Lugo, Ourense y Pontevedra). 
 
@@ -36,7 +36,7 @@ Este proyecto ha sido desarrollado como práctica de repaso para el módulo de *
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 com.example.roteiro/
@@ -49,7 +49,7 @@ com.example.roteiro/
 
 ---
 
-## 🚀 Requisitos de Ejecución
+##  Requisitos de Ejecución
 
 * **Android Studio**: Ladybug / 2024.2.1 o superior.
 * **JDK**: 17 o superior.
