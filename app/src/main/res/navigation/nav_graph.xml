@@ -1,0 +1,32 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/inicioFragment">
+
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.example.roteiro.InicioFragment"
+        android:label="@string/titulo_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/accion_inicio_a_lista"
+            app:destination="@id/listaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaFragment"
+        android:name="com.example.roteiro.ListaFragment"
+        android:label="@string/titulo_lista"
+        tools:layout="@layout/fragment_lista">
+
+        <argument
+            android:name="nome"
+            app:argType="string" />
+
+        <argument
+            android:name="provincia"
+            app:argType="integer" />
+    </fragment>
+
+
+</navigation>

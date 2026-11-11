@@ -1,0 +1,16 @@
+<resources>
+    <!-- Tema sen ActionBar: a barra é a MaterialToolbar de activity_main.xml -->
+    <style name="Base.Theme.Roteiro" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cor_principal</item>
+        <item name="colorOnPrimary">@color/cor_sobre_principal</item>
+        <item name="colorSecondary">@color/cor_secundaria</item>
+    </style>
+
+    <!-- Solo para la barra: lo que va encima del color principal, en blanco -->
+    <style name="ThemeOverlay.Roteiro.Barra" parent="">
+        <item name="android:textColorSecondary">@color/cor_sobre_principal</item>
+        <item name="colorControlNormal">@color/cor_sobre_principal</item>
+    </style><!-- Solo para la barra: lo que va encima del color principal, en blanco -->
+
+    <style name="Theme.Roteiro" parent="Base.Theme.Roteiro" />
+</resources>
