@@ -19,7 +19,7 @@ La aplicación permite al usuario:
 
 ## Tecnologías y Conceptos Clave (PMDM)
 
-Este proyecto ha sido desarrollado como práctica de repaso para el módulo de **Programación de Dispositivos Móviles (PMDM)** en el ciclo de **2º CS DAM** (IES San Clemente), abarcando los siguientes conceptos docentes:
+Este proyecto ha sido desarrollado como práctica de repaso para el módulo de **Programación de Dispositivos Móviles (PMDM)** en el ciclo de **2º CS DAM** (IES San Clemente), abarcando los siguientes conceptos:
 
 * **View Binding**: Acceso directo y seguro a las vistas del layout XML sin necesidad de `findViewById`.
 * **Jetpack Navigation & Safe Args**:
