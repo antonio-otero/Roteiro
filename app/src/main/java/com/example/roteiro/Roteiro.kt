@@ -1,6 +1,24 @@
 package com.example.roteiro
 
+/*
+ * PATRÓN SINGLETON EN KOTLIN ('object'):
+ * El patrón Singleton es un patrón de diseño creacional que garantiza que una clase tenga
+ * una ÚNICA instancia en toda la aplicación y proporciona un punto de acceso global a ella.
+ *
+ * En Kotlin, se implementa directamente usando la palabra clave 'object' (en lugar de 'class').
+ * El compilador crea e inicializa automáticamente una única instancia de forma segura (thread-safe) y perezosa (lazy).
+ *
+ * ¿CUÁNDO SE USA?
+ * 1. Para repositorios o catálogos de datos estáticos en memoria (como este catálogo de lugares turísticos).
+ * 2. Para clases de utilidad, gestores de configuración o fuentes de datos globales que no requieren múltiples instancias.
+ * 3. Evita el gasto de memoria de crear nuevos objetos cada vez y previene inconsistencias de datos.
+ *
+ * ¿DÓNDE Y CÓMO SE USA EN ESTA APP?
+ * Se utiliza en ListaFragment.kt mediante la llamada directa 'Roteiro.lugares(args.provincia)',
+ * sin necesidad de instanciar la clase mediante un constructor ('val r = Roteiro()').
+ */
 object Roteiro {
+    // Lista privada de listas de objetos Lugar, organizada por el índice de provincia (0: A Coruña, 1: Lugo, 2: Ourense, 3: Pontevedra).
     private val catalogo: List<List<Lugar>> = listOf(
         listOf(
             Lugar("Torre de Hércules", "A Coruña",
@@ -35,5 +53,11 @@ object Roteiro {
                 "Vila mariñeira con hórreos á beira do mar.")
         )
     )
+
+    /**
+     * Devuelve la lista de lugares turísticos pertenecientes al índice de provincia indicado.
+     * @param provincia Índice entero de la provincia (0 a 3).
+     * @return Lista de objetos Lugar correspondientes.
+     */
     fun lugares(provincia: Int): List<Lugar> = catalogo[provincia]
 }
