@@ -35,28 +35,37 @@ class ListaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /*
-         * USO DE LOS ARGUMENTOS DE NAVEGACIÓN:
-         * Acceso seguro a las propiedades 'provincia' y 'nome' recibidas mediante la propiedad 'args'.
-         * - args.provincia: Índice entero de la provincia elegida, usado para consultar los datos en Roteiro.
-         * - args.nome: Nombre introducido por el usuario en la pantalla de inicio.
+         * RECUPERACIÓN DE DATOS DESDE EL SINGLETON ('Roteiro'):
+         * Accedemos de forma directa al objeto Singleton 'Roteiro' (declarado con 'object Roteiro') sin instanciarlo.
+         * Llamamos al método 'Roteiro.lugares(args.provincia)' pasando el índice recuperado de los argumentos Safe Args.
+         * Este método consulta el catálogo en memoria y devuelve una lista de objetos 'List<Lugar>'.
          */
         val lugares = Roteiro.lugares(args.provincia)
         val nomeProvincia = resources.getStringArray(R.array.provincias)[args.provincia]
         binding.tvSaudo.text = getString(R.string.saudo, args.nome, nomeProvincia)
 
         /*
-         * ARRAY ADAPTER:
-         * Instanciación directa del adaptador ArrayAdapter para alimentar un ListView.
-         * Actúa como puente que transforma una lista de objetos en memoria (cadenas de texto con los nombres de los lugares)
-         * en elementos visuales individuales dentro del ListView.
-         * Parámetros:
-         * - requireContext(): El Contexto activo del Fragment necesario para inflar vistas.
-         * - R.layout.fila_lugar: Layout XML personalizado que representa la estructura visual de cada fila del ListView.
-         * - lugares.map { it.nome }: Fuente de datos, transformada en una List<String> con los nombres a mostrar.
-         * 
-         * Nota IMPORTANTE: Si se trata de una lista completamente estática definida en XML (arrays.xml),
-         * se podría asignar directamente en el layout XML mediante la propiedad android:entries="@array/mi_array".
-         * Cuando los datos son datos dinámicos/calculados en código, es necesario usar un ArrayAdapter en Kotlin.
+         * ARRAY ADAPTER Y TRANSFORMACIÓN DE DATOS CON .map:
+         *
+         * EL MÉTODO .map { it.nome }:
+         * '.map' es una función de orden superior de Kotlin que transforma cada elemento de una colección original.
+         * Toma la lista de objetos complejos 'List<Lugar>' y proyecta/extrae únicamente la propiedad 'nome' de cada objeto.
+         * Como resultado, genera una nueva lista de cadenas de texto 'List<String>' de la misma longitud.
+         *
+         * NOTA DE SINTAXIS (it vs parámetro explícito):
+         * 'it.nome' es exactamente equivalente a escribir '{ lugar -> lugar.nome }'.
+         * En Kotlin, cuando una función lambda recibe UN SÓLO parámetro, no es necesario nombrarlo explícitamente;
+         * el lenguaje le asigna automáticamente el nombre implícito 'it'.
+         *
+         * ¿POR QUÉ SE USA AQUÍ?
+         * El ArrayAdapter requiere una lista de textos ('List<String>') para asignarlos automáticamente
+         * al TextView de la fila ('R.layout.fila_lugar'). El método '.map' permite extraer la propiedad deseada
+         * sin modificar los objetos originales del Singleton.
+         *
+         * Parámetros del ArrayAdapter:
+         * - requireContext(): Contexto activo del Fragment necesario para inflar vistas.
+         * - R.layout.fila_lugar: Layout XML personalizado para cada fila del ListView.
+         * - lugares.map { it.nome }: Lista de Strings obtenida al transformar la colección recuperada del Singleton.
          */
         binding.lvLugares.adapter = ArrayAdapter(
             requireContext(),
